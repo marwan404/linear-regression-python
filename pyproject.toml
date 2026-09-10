@@ -1,7 +1,7 @@
 [project]
-name = "price-predictor"
+name = "linear regression"
 version = "0.1.0"
-description = "Add your description here"
+description = "Fits data"
 readme = "README.md"
 authors = [
     { name = "marwan404", email = "marwanabdelmajeed29@gmail.com" }

@@ -34,3 +34,5 @@ Thumbs.db
 
 #Extra files
 data.csv
+uv.lock
+pyproject.toml
