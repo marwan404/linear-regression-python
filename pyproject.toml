@@ -1,5 +1,5 @@
 [project]
-name = "linear regression"
+name = "model"
 version = "0.1.0"
 description = "Fits data"
 readme = "README.md"

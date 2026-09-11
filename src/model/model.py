@@ -9,45 +9,42 @@ class LinearRegression():
         x = self.x_values
         y = self.y_values
 
-        sigma_x = np.sum(x)
-        sigma_y = np.sum(y)
-        sigma_xy = np.sum(x * y)
+        self.sigma_x = np.sum(x)
+        self.sigma_y = np.sum(y)
+        self.sigma_xy = np.sum(x * y)
 
-        sigma_xsqr = np.sum(x ** 2)
-        sigma_ysqr = np.sum(y ** 2)
+        self.sigma_xsqr = np.sum(x ** 2)
+        self.sigma_ysqr = np.sum(y ** 2)
 
-        return sigma_x, sigma_y, sigma_xy, sigma_xsqr, sigma_ysqr
-
-    def calculateSummaryStatistics(self, sigma_x, sigma_y, sigma_xy, sigma_xsqr, sigma_ysqr):
+    def calculateSummaryStatistics(self):
         n = self.x_values.shape[0]
 
-        Sxx = sigma_xsqr - (sigma_x ** 2)/n
-        Syy = sigma_ysqr - (sigma_y ** 2)/n
-        Sxy = sigma_xy - (sigma_x * sigma_y)/n
+        self.Sxx = self.sigma_xsqr - (self.sigma_x ** 2)/n
+        self.Syy = self.sigma_ysqr - (self.sigma_y ** 2)/n
+        self.Sxy = self.sigma_xy - (self.sigma_x * self.sigma_y)/n
 
-        return Sxx, Syy, Sxy
-
-    def fit(self, Sxx, Sxy):
+    def fit(self):
         n = self.x_values.shape[0]
         sigma_x = np.sum(self.x_values)
         sigma_y = np.sum(self.y_values)
 
-        b = Sxy / Sxx
-        a = (sigma_y / n) - b * (sigma_x / n)
+        self.b = self.Sxy / self.Sxx
+        self.a = (sigma_y / n) - self.b * (sigma_x / n)
 
-        return a, b
 
-    def calculateCorelation(self, Sxx, Syy,Sxy):
+    def calculateCorelation(self):
 
-        r = Sxy/((Sxx * Syy) ** 0.5)
+        r = self.Sxy/((self.Sxx * self.Syy) ** 0.5)
         direction = "positive" if r >=0 else "negative"
 
-        return abs(r), direction
+        self.r = abs(r)
+        self.direction = direction
 
     def learn(self):
-        sigma_x, sigma_y, sigma_xy, sigma_xsqr, sigma_ysqr = self.calculateSums()
-        Sxx, Syy, Sxy = self.calculateSummaryStatistics(sigma_x, sigma_y, sigma_xy, sigma_xsqr, sigma_ysqr)
-        r, direction = self.calculateCorellation(Sxx, Syy,Sxy)
-        a, b = self.fit(Sxx, Sxy)
+        self.calculateSums()
+        self.calculateSummaryStatistics()
+        self.calculateCorelation()
+        self.fit()
 
-        return a, b, r, direction
+    def predict(self, x):
+        return self.a + self.b * x
