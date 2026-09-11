@@ -41,7 +41,7 @@ class LinearRegression():
 
         return a, b
 
-    def calculateCorellation(self, Sxx, Syy,Sxy):
+    def calculateCorelation(self, Sxx, Syy,Sxy):
 
         r = Sxy/((Sxx * Syy) ** 0.5)
         direction = "positive" if r >=0 else "negative"
