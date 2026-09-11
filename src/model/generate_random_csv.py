@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+
 def generate_csv():
     n = 100
 
