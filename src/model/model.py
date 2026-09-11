@@ -28,16 +28,12 @@ class LinearRegression():
         return Sxx, Syy, Sxy
 
     def fit(self, Sxx, Sxy):
-        
-        x = self.x_values
-        y = self.y_values
-        n = x.shape[0]
+        n = self.x_values.shape[0]
+        sigma_x = np.sum(self.x_values)
+        sigma_y = np.sum(self.y_values)
 
-        sigma_x = np.sum(x)
-        sigma_y = np.sum(y)
-
-        b = Sxy/Sxx
-        a = (sigma_y/n) - (b * (sigma_x/n))
+        b = Sxy / Sxx
+        a = (sigma_y / n) - b * (sigma_x / n)
 
         return a, b
 
